@@ -9,12 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ApiPublicVolunteerRouteImport } from './routes/api/public/volunteer'
 import { Route as ApiPublicRegisterRouteImport } from './routes/api/public/register'
 
+const VolunteerRoute = VolunteerRouteImport.update({
+  id: '/volunteer',
+  path: '/volunteer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -34,6 +41,11 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiPublicVolunteerRoute = ApiPublicVolunteerRouteImport.update({
+  id: '/api/public/volunteer',
+  path: '/api/public/volunteer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicRegisterRoute = ApiPublicRegisterRouteImport.update({
   id: '/api/public/register',
   path: '/api/public/register',
@@ -43,46 +55,75 @@ const ApiPublicRegisterRoute = ApiPublicRegisterRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/volunteer': typeof VolunteerRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/api/public/register': typeof ApiPublicRegisterRoute
+  '/api/public/volunteer': typeof ApiPublicVolunteerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/volunteer': typeof VolunteerRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/api/public/register': typeof ApiPublicRegisterRoute
+  '/api/public/volunteer': typeof ApiPublicVolunteerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/volunteer': typeof VolunteerRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/api/public/register': typeof ApiPublicRegisterRoute
+  '/api/public/volunteer': typeof ApiPublicVolunteerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/admin' | '/api/public/register'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/volunteer'
+    | '/admin'
+    | '/api/public/register'
+    | '/api/public/volunteer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/admin' | '/api/public/register'
+  to:
+    | '/'
+    | '/auth'
+    | '/volunteer'
+    | '/admin'
+    | '/api/public/register'
+    | '/api/public/volunteer'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/volunteer'
     | '/_authenticated/admin'
     | '/api/public/register'
+    | '/api/public/volunteer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  VolunteerRoute: typeof VolunteerRoute
   ApiPublicRegisterRoute: typeof ApiPublicRegisterRoute
+  ApiPublicVolunteerRoute: typeof ApiPublicVolunteerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/volunteer': {
+      id: '/volunteer'
+      path: '/volunteer'
+      fullPath: '/volunteer'
+      preLoaderRoute: typeof VolunteerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -111,6 +152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/volunteer': {
+      id: '/api/public/volunteer'
+      path: '/api/public/volunteer'
+      fullPath: '/api/public/volunteer'
+      preLoaderRoute: typeof ApiPublicVolunteerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/register': {
       id: '/api/public/register'
       path: '/api/public/register'
@@ -136,7 +184,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  VolunteerRoute: VolunteerRoute,
   ApiPublicRegisterRoute: ApiPublicRegisterRoute,
+  ApiPublicVolunteerRoute: ApiPublicVolunteerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

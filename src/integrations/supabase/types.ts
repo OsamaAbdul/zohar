@@ -59,6 +59,54 @@ export type Database = {
         }
         Relationships: []
       }
+      volunteers: {
+        Row: {
+          id: string
+          full_name: string
+          email: string
+          phone: string
+          gender: string | null
+          age: string | null
+          occupation: string | null
+          state: string | null
+          city: string | null
+          available_throughout: boolean
+          commit_meetings: boolean
+          teams: string[]
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          full_name: string
+          email: string
+          phone: string
+          gender?: string | null
+          age?: string | null
+          occupation?: string | null
+          state?: string | null
+          city?: string | null
+          available_throughout?: boolean
+          commit_meetings?: boolean
+          teams?: string[]
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          full_name?: string
+          email?: string
+          phone?: string
+          gender?: string | null
+          age?: string | null
+          occupation?: string | null
+          state?: string | null
+          city?: string | null
+          available_throughout?: boolean
+          commit_meetings?: boolean
+          teams?: string[]
+          created_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -105,6 +153,22 @@ export type Database = {
           _organization: string
           _phone: string
           _state: string
+        }
+        Returns: Json
+      }
+      register_volunteer: {
+        Args: {
+          _full_name: string
+          _email: string
+          _phone: string
+          _gender: string
+          _age: string
+          _occupation: string
+          _state: string
+          _city: string
+          _available_throughout: boolean
+          _commit_meetings: boolean
+          _teams: string[]
         }
         Returns: Json
       }
