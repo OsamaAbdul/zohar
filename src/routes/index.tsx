@@ -13,6 +13,7 @@ import {
 import heroBg from "@/assets/hero-bg.jpg";
 import aboutImg from "@/assets/about-youth.jpg";
 import logo from "@/assets/ZOHAR-1.png"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,9 +58,6 @@ function Nav() {
           <span className="text-muted-foreground hidden sm:inline">INSPIRED 2026</span>
         </a>
         <div className="flex items-center gap-3">
-          <a href="/volunteer" className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-4 py-2 text-sm font-semibold hover:border-mint/40 transition hidden sm:inline-flex">
-            Become a Volunteer
-          </a>
           <a href="#register" className="inline-flex items-center gap-1.5 rounded-full bg-mint px-4 py-2 text-sm font-semibold text-mint-foreground shadow-mint hover:opacity-90 transition">
             Register <ArrowRight className="h-4 w-4" />
           </a>
@@ -220,9 +218,18 @@ function Hero() {
           <a href="#register" className="inline-flex items-center justify-center gap-2 rounded-full bg-mint px-6 py-3.5 text-base font-semibold text-mint-foreground shadow-mint hover:translate-y-[-1px] transition">
             Register Now <ArrowRight className="h-4 w-4" />
           </a>
-          <a href="/volunteer" className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card/60 px-6 py-3.5 text-base font-semibold hover:border-mint/40 transition">
-            Register as a Volunteer
-          </a>
+          <TooltipProvider>
+            <Tooltip open={true}>
+              <TooltipTrigger asChild>
+                <span className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card/60 px-6 py-3.5 text-base font-semibold opacity-50 cursor-not-allowed">
+                  Register as a Volunteer
+                </span>
+              </TooltipTrigger>
+              <TooltipContent side="top" sideOffset={-10} className="bg-flame text-white border-flame relative z-10">
+                <p>Closed</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
 
         <div className="mt-12 grid grid-cols-3 gap-3 sm:gap-8 text-center max-w-md w-full">
@@ -247,7 +254,7 @@ function About() {
   return (
     <section id="about" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 grid gap-10 lg:grid-cols-2 lg:items-center">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -305,7 +312,7 @@ function WhyAttend() {
   return (
     <section className="py-20 sm:py-28 bg-deep">
       <div className="mx-auto max-w-6xl px-5">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -319,12 +326,12 @@ function WhyAttend() {
         </motion.div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map(({ icon: Icon, t, d }, i) => (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              key={t} 
+              key={t}
               className="group rounded-2xl border border-border bg-card p-6 hover:border-mint/40 hover:-translate-y-0.5 transition"
             >
               <div className="h-11 w-11 rounded-xl bg-mint/15 grid place-items-center text-mint group-hover:bg-mint group-hover:text-mint-foreground transition">
@@ -345,7 +352,7 @@ function Speakers() {
   return (
     <section id="speakers" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -363,12 +370,12 @@ function Speakers() {
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3, 4].map((item, i) => (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              key={item} 
+              key={item}
               className="rounded-2xl border border-border bg-card p-5 text-center"
             >
               <div className="mx-auto h-28 w-28 rounded-full bg-gradient-mint/20 border border-mint/30 grid place-items-center relative overflow-hidden">
@@ -399,7 +406,7 @@ function WhoShouldAttend() {
   return (
     <section className="py-20 sm:py-28 bg-deep">
       <div className="mx-auto max-w-6xl px-5">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -413,12 +420,12 @@ function WhoShouldAttend() {
         </motion.div>
         <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {groups.map(({ icon: Icon, t }, i) => (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              key={t} 
+              key={t}
               className="rounded-2xl border border-border bg-card p-5 sm:p-6 flex items-center gap-3 hover:border-mint/40 transition"
             >
               <div className="h-10 w-10 shrink-0 rounded-xl bg-mint/15 text-mint grid place-items-center">
@@ -484,7 +491,7 @@ function Register() {
   return (
     <section id="register" className="py-20 sm:py-28">
       <div className="mx-auto max-w-3xl px-5">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -499,7 +506,7 @@ function Register() {
         </motion.div>
 
         {errorState === "full" ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
             className="mt-10 rounded-3xl border border-flame/40 bg-flame/10 p-8 text-center"
           >
@@ -513,7 +520,7 @@ function Register() {
             </p>
           </motion.div>
         ) : submitted ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
             className="mt-10 rounded-3xl border border-mint/40 bg-mint/10 p-8 text-center"
           >
@@ -553,7 +560,7 @@ function Register() {
             <FormGroup label="A Few Questions">
               <Textarea label="Why would you like to attend INSPIRED?" name="why" />
               <Select label="How did you hear about this event?" name="hear"
-                options={["Social Media", "Friend", "Church", "Email", "Other"]} />
+                options={["Social Media", "Friend", "Church", "Mosque", "Instagram", "Facebook", "Twitter", "Other"]} />
             </FormGroup>
 
             <label className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -620,7 +627,7 @@ function Textarea({ label, name }: { label: string; name: string }) {
 function Partners() {
   return (
     <section id="partners" className="py-20 sm:py-24 bg-deep">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -633,12 +640,12 @@ function Partners() {
         </h2>
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
           {["Partner One", "Partner Two", "Partner Three", "Partner Four"].map((p, i) => (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              key={p} 
+              key={p}
               className="h-20 rounded-2xl border border-border bg-card grid place-items-center text-sm text-muted-foreground"
             >
               {p}
@@ -665,7 +672,7 @@ function FAQ() {
   return (
     <section id="faq" className="py-20 sm:py-28">
       <div className="mx-auto max-w-3xl px-5">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -677,12 +684,12 @@ function FAQ() {
         </motion.div>
         <div className="mt-10 space-y-3">
           {items.map((f, i) => (
-            <motion.details 
+            <motion.details
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              key={i} 
+              key={i}
               className="group rounded-2xl border border-border bg-card p-5 open:border-mint/40 transition"
             >
               <summary className="flex cursor-pointer items-center justify-between gap-4 font-display font-semibold list-none">
@@ -702,7 +709,7 @@ function FAQ() {
 function Footer() {
   return (
     <footer className="bg-deep border-t border-border pt-16 pb-8">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
