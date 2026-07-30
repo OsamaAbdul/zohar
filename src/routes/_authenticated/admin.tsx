@@ -7,7 +7,7 @@ import { listRegistrations } from "@/lib/admin.functions";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Admin — INSPIRED 2026 Registrations" }] }),
+  head: () => ({ meta: [{ title: "Admin — INSPIRE 1.0 Registrations" }] }),
   component: AdminPage,
 });
 
@@ -95,7 +95,7 @@ function AdminPage() {
 
       <main className="mx-auto max-w-6xl px-5 py-12">
         <h1 className="font-display text-3xl sm:text-4xl font-bold">
-          INSPIRED 2026 <span className="text-mint">Registrations</span>
+          INSPIRE 1.0 <span className="text-mint">Registrations</span>
         </h1>
         <p className="mt-2 text-muted-foreground">Download the complete attendee list as an Excel file.</p>
 

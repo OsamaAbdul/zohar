@@ -7,8 +7,8 @@ export const Route = createFileRoute("/volunteer")({
   component: VolunteerRegistration,
   head: () => ({
     meta: [
-      { title: "Volunteer Registration | INSPIRED 2026" },
-      { name: "description", content: "Register to volunteer at INSPIRED 2026." },
+      { title: "Volunteer Registration | INSPIRE 1.0" },
+      { name: "description", content: "Register to volunteer at INSPIRE 1.0." },
     ],
   }),
 });
@@ -32,13 +32,13 @@ function VolunteerRegistration() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
-    
+
     setSubmitting(true);
     setErrorMsg("");
-    
+
     const fd = new FormData(e.currentTarget);
     const selectedTeams = TEAMS.filter((team) => fd.get(team) === "on");
-    
+
     if (selectedTeams.length === 0) {
       setErrorMsg("Please select at least one team you would like to serve in.");
       setSubmitting(false);
@@ -105,7 +105,7 @@ function VolunteerRegistration() {
               Volunteer <span className="text-mint">Registration</span>
             </h1>
             <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
-              Help us build an unforgettable experience at INSPIRED 2026. Fill out the form below to join our volunteer team.
+              Help us build an unforgettable experience at INSPIRE 1.0. Fill out the form below to join our volunteer team.
             </p>
           </div>
 
@@ -136,11 +136,11 @@ function VolunteerRegistration() {
 
               <FormGroup label="Location & Occupation">
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <Select 
-                    label="Current Occupation" 
-                    name="occupation" 
-                    options={["Student", "NYSC Member", "Entrepreneur", "Professional"]} 
-                    required 
+                  <Select
+                    label="Current Occupation"
+                    name="occupation"
+                    options={["Student", "NYSC Member", "Entrepreneur", "Professional"]}
+                    required
                   />
                   <Field label="State" name="state" required />
                   <Field label="City/Town" name="city" required className="sm:col-span-2" />
@@ -148,17 +148,17 @@ function VolunteerRegistration() {
               </FormGroup>
 
               <FormGroup label="Availability & Commitment">
-                <RadioGroup 
-                  label="Will you be available throughout the event period, including orientation and meetings?" 
-                  name="available_throughout" 
-                  options={["Yes", "No"]} 
-                  required 
+                <RadioGroup
+                  label="Will you be available throughout the event period, including orientation and meetings?"
+                  name="available_throughout"
+                  options={["Yes", "No"]}
+                  required
                 />
-                <RadioGroup 
-                  label="Can you commit to attending meetings before the event?" 
-                  name="commit_meetings" 
-                  options={["Yes", "No"]} 
-                  required 
+                <RadioGroup
+                  label="Can you commit to attending meetings before the event?"
+                  name="commit_meetings"
+                  options={["Yes", "No"]}
+                  required
                 />
               </FormGroup>
 
@@ -167,10 +167,10 @@ function VolunteerRegistration() {
                 <div className="grid sm:grid-cols-2 gap-3">
                   {TEAMS.map((team) => (
                     <label key={team} className="flex items-start gap-3 cursor-pointer p-3 rounded-xl border border-input hover:border-mint/50 transition">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         name={team}
-                        className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-[color:var(--mint)]" 
+                        className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-[color:var(--mint)]"
                       />
                       <span className="text-sm select-none">{team}</span>
                     </label>

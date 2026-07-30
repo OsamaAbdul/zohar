@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { LayoutGroup, motion } from "framer-motion";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
@@ -14,14 +14,21 @@ import heroBg from "@/assets/hero-bg.jpg";
 import aboutImg from "@/assets/about-youth.jpg";
 import logo from "@/assets/ZOHAR-1.png"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "INSPIRED 2026 — The Economy of Legacy Builders | ZOHAR" },
-      { name: "description", content: "Join INSPIRED 2026 by ZOHAR. Learn from leaders who built legacies of excellence and shape the next generation of marketplace influence." },
-      { property: "og:title", content: "INSPIRED 2026 — The Economy of Legacy Builders" },
-      { property: "og:description", content: "Reserve your seat at INSPIRED 2026. Real stories. Practical lessons. Lifelong influence." },
+      { title: "INSPIRE 1.0 — The Economy of Legacy Builders | ZOHAR" },
+      { name: "description", content: "Join INSPIRE 1.0  by ZOHAR. Learn from leaders who built legacies of excellence and shape the next generation of marketplace influence." },
+      { property: "og:title", content: "INSPIRE 1.0 — The Economy of Legacy Builders" },
+      { property: "og:description", content: "Reserve your seat at INSPIRE 1.0. Real stories. Practical lessons. Lifelong influence." },
     ],
   }),
   component: Landing,
@@ -30,6 +37,7 @@ export const Route = createFileRoute("/")({
 function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <PosterPromoModal />
       <Nav />
       <Hero />
       <About />
@@ -55,9 +63,12 @@ function Nav() {
           </span>
 
           <span className="text-mint">•</span>
-          <span className="text-muted-foreground hidden sm:inline">INSPIRED 2026</span>
+          <span className="text-muted-foreground hidden sm:inline">INSPIRE 1.0</span>
         </a>
         <div className="flex items-center gap-3">
+          <Link to="/poster" className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-4 py-2 text-sm font-semibold hover:bg-muted transition">
+            Generate Poster
+          </Link>
           <a href="#register" className="inline-flex items-center gap-1.5 rounded-full bg-mint px-4 py-2 text-sm font-semibold text-mint-foreground shadow-mint hover:opacity-90 transition">
             Register <ArrowRight className="h-4 w-4" />
           </a>
@@ -218,6 +229,9 @@ function Hero() {
           <a href="#register" className="inline-flex items-center justify-center gap-2 rounded-full bg-mint px-6 py-3.5 text-base font-semibold text-mint-foreground shadow-mint hover:translate-y-[-1px] transition">
             Register Now <ArrowRight className="h-4 w-4" />
           </a>
+          <Link to="/poster" className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card/60 px-6 py-3.5 text-base font-semibold hover:bg-muted transition">
+            Generate Poster
+          </Link>
           <TooltipProvider>
             <Tooltip open={true}>
               <TooltipTrigger asChild>
@@ -236,7 +250,7 @@ function Hero() {
           {[
             { k: "1st", v: "Edition" },
             { k: "10+", v: "Speakers" },
-            { k: "500+", v: "Attendees" },
+            { k: "200+", v: "Attendees" },
           ].map((s) => (
             <div key={s.k} className="rounded-2xl border border-border bg-card/40 px-2 py-3 backdrop-blur-md">
               <div className="font-display text-2xl sm:text-3xl font-bold text-mint">{s.k}</div>
@@ -515,7 +529,7 @@ function Register() {
             </div>
             <h3 className="mt-4 font-display text-2xl font-bold">All 100 spots are filled</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Thank you for your interest. Registration for INSPIRED 2026 is now closed —
+              Thank you for your interest. Registration for INSPIRE 1.0 is now closed —
               follow us on social media for updates and future opportunities.
             </p>
           </motion.div>
@@ -565,7 +579,7 @@ function Register() {
 
             <label className="flex items-start gap-3 text-sm text-muted-foreground">
               <input type="checkbox" required className="mt-1 h-4 w-4 rounded border-border accent-[color:var(--mint)]" />
-              <span>I agree to receive updates regarding INSPIRED.</span>
+              <span>I agree to receive updates regarding INSPIRE.</span>
             </label>
 
             {errorState === "generic" && (
@@ -663,11 +677,11 @@ function Partners() {
 /* ---------- FAQ ---------- */
 function FAQ() {
   const items = [
-    { q: "Is registration free?", a: "Yes — INSPIRED 2026 is free to attend. We just ask that you register so we can plan your seat." },
+    { q: "Is registration free?", a: "Yes — INSPIRE 1.0 is free to attend. We just ask that you register so we can plan your seat." },
     { q: "Who can attend?", a: "Students, young professionals, entrepreneurs, emerging leaders, creatives, and anyone passionate about impact." },
     { q: "Will certificates be issued?", a: "Yes. Attendees will receive a certificate of participation after the event." },
     { q: "How will I receive event updates?", a: "Via the email and phone number you provide during registration, and on our social channels." },
-    { q: "Can organizations partner with INSPIRED?", a: "Absolutely. Reach out via partners@zohar.org.ng to discuss partnership opportunities." },
+    { q: "Can organizations partner with INSPIRE 1.0?", a: "Absolutely. Reach out via officialzohar7@gmail.com to discuss partnership opportunities." },
   ];
   return (
     <section id="faq" className="py-20 sm:py-28">
@@ -794,5 +808,48 @@ export function Tiktok(props: React.SVGProps<SVGSVGElement>) {
     >
       <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
     </svg>
+  );
+}
+
+function PosterPromoModal() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const hasSeenPromo = sessionStorage.getItem("hasSeenPosterPromo");
+    if (!hasSeenPromo) {
+      const timer = setTimeout(() => {
+        setOpen(true);
+        sessionStorage.setItem("hasSeenPosterPromo", "true");
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="sm:max-w-md text-center">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-display font-bold">Ready for Impact?</DialogTitle>
+          <DialogDescription className="text-base pt-2">
+            Generate your personalized <span className="text-mint font-semibold">"I am attending"</span> poster and share it with your network!
+          </DialogDescription>
+        </DialogHeader>
+        <div className="mt-4 flex flex-col gap-3">
+          <Link
+            to="/poster"
+            className="w-full rounded-full bg-mint py-3 font-semibold text-mint-foreground shadow-mint hover:opacity-95 transition inline-flex items-center justify-center"
+            onClick={() => setOpen(false)}
+          >
+            Generate My Poster
+          </Link>
+          <button
+            onClick={() => setOpen(false)}
+            className="w-full rounded-full border border-border bg-card/60 py-3 text-sm font-semibold hover:bg-muted transition"
+          >
+            Maybe Later
+          </button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

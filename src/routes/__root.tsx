@@ -77,9 +77,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "INSPIRED 2026 — The Economy of Legacy Builders | ZOHAR" },
-      { name: "description", content: "INSPIRED 2026 by ZOHAR. Learn from leaders who built legacies of excellence. Join a generation committed to impact and marketplace influence." },
-      { property: "og:title", content: "INSPIRED 2026 — The Economy of Legacy Builders" },
+      { title: "INSPIRE 1.0 — The Economy of Legacy Builders | ZOHAR" },
+      { name: "description", content: "INSPIRE 1.0 by ZOHAR. Learn from leaders who built legacies of excellence. Join a generation committed to impact and marketplace influence." },
+      { property: "og:title", content: "INSPIRE 1.0 — The Economy of Legacy Builders" },
       { property: "og:description", content: "A youth leadership initiative by ZOHAR. Reserve your seat." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

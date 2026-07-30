@@ -1,6 +1,6 @@
-# ZOHAR INSPIRED 2026 Registration Portal
+# ZOHAR INSPIRE 1.0 Registration Portal
 
-Welcome to the **INSPIRED 2026** registration and landing page repository, built by ZOHAR. This application provides a beautiful, animated landing page to inspire the next generation of legacy builders, alongside a robust registration system to secure seats for the event.
+Welcome to the **INSPIRED 1.0** registration and landing page repository, built by ZOHAR. This application provides a beautiful, animated landing page to inspire the next generation of legacy builders, alongside a robust registration system to secure seats for the event.
 
 ## 🚀 Tech Stack
 

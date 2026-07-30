@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VolunteerRouteImport } from './routes/volunteer'
+import { Route as PosterRouteImport } from './routes/poster'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -20,6 +21,11 @@ import { Route as ApiPublicRegisterRouteImport } from './routes/api/public/regis
 const VolunteerRoute = VolunteerRouteImport.update({
   id: '/volunteer',
   path: '/volunteer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PosterRoute = PosterRouteImport.update({
+  id: '/poster',
+  path: '/poster',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -55,6 +61,7 @@ const ApiPublicRegisterRoute = ApiPublicRegisterRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/poster': typeof PosterRoute
   '/volunteer': typeof VolunteerRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/api/public/register': typeof ApiPublicRegisterRoute
@@ -63,6 +70,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/poster': typeof PosterRoute
   '/volunteer': typeof VolunteerRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/api/public/register': typeof ApiPublicRegisterRoute
@@ -73,6 +81,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/poster': typeof PosterRoute
   '/volunteer': typeof VolunteerRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/api/public/register': typeof ApiPublicRegisterRoute
@@ -83,6 +92,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/poster'
     | '/volunteer'
     | '/admin'
     | '/api/public/register'
@@ -91,6 +101,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/poster'
     | '/volunteer'
     | '/admin'
     | '/api/public/register'
@@ -100,6 +111,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/poster'
     | '/volunteer'
     | '/_authenticated/admin'
     | '/api/public/register'
@@ -110,6 +122,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  PosterRoute: typeof PosterRoute
   VolunteerRoute: typeof VolunteerRoute
   ApiPublicRegisterRoute: typeof ApiPublicRegisterRoute
   ApiPublicVolunteerRoute: typeof ApiPublicVolunteerRoute
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/volunteer'
       fullPath: '/volunteer'
       preLoaderRoute: typeof VolunteerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/poster': {
+      id: '/poster'
+      path: '/poster'
+      fullPath: '/poster'
+      preLoaderRoute: typeof PosterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -184,6 +204,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  PosterRoute: PosterRoute,
   VolunteerRoute: VolunteerRoute,
   ApiPublicRegisterRoute: ApiPublicRegisterRoute,
   ApiPublicVolunteerRoute: ApiPublicVolunteerRoute,
