@@ -6,7 +6,8 @@ import { toast } from 'sonner';
 
 export function PosterGenerator() {
   const [image, setImage] = useState<string | null>(null);
-  
+  const [name, setName] = useState<string>("");
+
   const posterRef = useRef<HTMLDivElement>(null);
   const { exportPoster, isExporting } = usePosterExport();
 
@@ -23,10 +24,10 @@ export function PosterGenerator() {
   };
 
   const handleGenerate = async () => {
-    
+
     await exportPoster(posterRef.current);
     if (!isExporting) {
-       toast.success("Poster downloaded successfully!");
+      toast.success("Poster downloaded successfully!");
     }
   };
 
@@ -36,10 +37,22 @@ export function PosterGenerator() {
       <div className="space-y-8 bg-card/40 border border-border p-6 sm:p-8 rounded-3xl backdrop-blur-md">
         <div>
           <h2 className="text-2xl font-display font-bold text-foreground">Personalize Your Poster</h2>
-          <p className="text-sm text-muted-foreground mt-2">Upload a photo for your personalized poster.</p>
+          <p className="text-sm text-muted-foreground mt-2">Upload a photo and enter your name for your personalized poster.</p>
         </div>
 
         <div className="space-y-5">
+          {/* Name Input */}
+          <div className="space-y-3">
+            <label className="text-xs uppercase tracking-wider text-mint font-semibold">Your Name</label>
+            <input
+              type="text"
+              placeholder="e.g. Osama Abdul"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-mint/50 transition-all"
+            />
+          </div>
+
           {/* Image Upload */}
           <div className="space-y-3">
             <label className="text-xs uppercase tracking-wider text-mint font-semibold">Profile Photo (Optional)</label>
@@ -52,20 +65,20 @@ export function PosterGenerator() {
               <input type="file" className="hidden" accept="image/*" onChange={handleImageUpload} />
             </label>
             {image && (
-               <p className="text-xs text-mint">Image selected successfully!</p>
+              <p className="text-xs text-mint">Image selected successfully!</p>
             )}
           </div>
         </div>
 
-        <button 
+        <button
           onClick={handleGenerate}
           disabled={isExporting}
           className="w-full rounded-full bg-mint py-4 font-semibold text-mint-foreground shadow-mint hover:opacity-95 transition inline-flex items-center justify-center gap-2 disabled:opacity-60"
         >
           {isExporting ? (
-             <><Loader2 className="h-5 w-5 animate-spin" /> Generating...</>
+            <><Loader2 className="h-5 w-5 animate-spin" /> Generating...</>
           ) : (
-             <><Download className="h-5 w-5" /> Download Poster</>
+            <><Download className="h-5 w-5" /> Download Poster</>
           )}
         </button>
       </div>
@@ -73,10 +86,10 @@ export function PosterGenerator() {
       {/* Preview Section */}
       <div className="flex flex-col items-center w-full">
         <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-widest self-start lg:self-center">Live Preview</h3>
-        <div className="w-full max-w-[400px] aspect-square relative rounded-3xl overflow-hidden border border-border shadow-soft bg-background">
-           <div className="absolute top-0 left-0 origin-top-left" style={{ transform: 'scale(0.37037)' }}>
-                 <PosterPreview ref={posterRef} image={image} />
-           </div>
+        <div className="w-full max-w-[400px] aspect-[4/5] relative rounded-3xl overflow-hidden border border-border shadow-soft bg-background">
+          <div className="absolute top-0 left-0 origin-top-left" style={{ transform: 'scale(0.37037)' }}>
+            <PosterPreview ref={posterRef} image={image} name={name} />
+          </div>
         </div>
       </div>
     </div>
