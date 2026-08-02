@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
 function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <PosterPromoModal />
+      {/* <PosterPromoModal /> */}
       <Nav />
       <Hero />
       <About />
@@ -66,9 +66,9 @@ function Nav() {
           <span className="text-muted-foreground hidden sm:inline">INSPIRE 1.0</span>
         </a>
         <div className="flex items-center gap-3">
-          <Link to="/poster" className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-4 py-2 text-sm font-semibold hover:bg-muted transition">
+          {/* <Link to="/poster" className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-4 py-2 text-sm font-semibold hover:bg-muted transition">
             Generate Poster
-          </Link>
+          </Link> */}
           <a href="#register" className="inline-flex items-center gap-1.5 rounded-full bg-mint px-4 py-2 text-sm font-semibold text-mint-foreground shadow-mint hover:opacity-90 transition">
             Register <ArrowRight className="h-4 w-4" />
           </a>
@@ -229,9 +229,9 @@ function Hero() {
           <a href="#register" className="inline-flex items-center justify-center gap-2 rounded-full bg-mint px-6 py-3.5 text-base font-semibold text-mint-foreground shadow-mint hover:translate-y-[-1px] transition">
             Register Now <ArrowRight className="h-4 w-4" />
           </a>
-          <Link to="/poster" className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card/60 px-6 py-3.5 text-base font-semibold hover:bg-muted transition">
+          {/* <Link to="/poster" className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card/60 px-6 py-3.5 text-base font-semibold hover:bg-muted transition">
             Generate Poster
-          </Link>
+          </Link> */}
           <TooltipProvider>
             <Tooltip open={true}>
               <TooltipTrigger asChild>
@@ -811,6 +811,7 @@ export function Tiktok(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+/*
 function PosterPromoModal() {
   const [open, setOpen] = useState(false);
 
@@ -853,3 +854,4 @@ function PosterPromoModal() {
     </Dialog>
   );
 }
+*/
