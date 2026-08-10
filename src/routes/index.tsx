@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import aboutImg from "@/assets/about-youth.jpg";
-import logo from "@/assets/ZOHAR-1.png"
+import logo from "@/assets/ZOHAR-1.png";
+import charactersDesktop from "@/assets/characters-desktop (1).webp";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Dialog,
@@ -21,6 +22,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import MarqueeAlongSvgPath from "@/components/ui/marquee-along-svg-path";
+import PhoneMockupBasic from "@/components/ui/phone-mockups-1";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,6 +43,17 @@ function Landing() {
       {/* <PosterPromoModal /> */}
       <Nav />
       <Hero />
+      <section className="py-16 sm:py-24 flex flex-col items-center justify-center w-full">
+        <div className="mb-12 text-center z-10 px-5 max-w-2xl">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold">
+            Experience <span className="text-mint">Impact</span>
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            A glimpse into the community, lessons, and legacy of ZOHAR.
+          </p>
+        </div>
+        <PhoneMockupBasic />
+      </section>
       <About />
       <WhyAttend />
       <Speakers />
@@ -47,6 +61,8 @@ function Landing() {
       <Register />
       <Partners />
       <FAQ />
+      <RegisteredAvatars />
+      <CharactersSection />
       <Footer />
     </div>
   );
@@ -55,21 +71,14 @@ function Landing() {
 /* ---------- Nav ---------- */
 function Nav() {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
-      <div className="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2 font-display font-bold tracking-tight">
-          <span className="h-20 w-20  grid place-items-center text-mint-foreground">
-            <img src={logo} className="h-20 w-20" />
-          </span>
-
-          <span className="text-mint">•</span>
-          <span className="text-muted-foreground hidden sm:inline">INSPIRE 1.0</span>
-        </a>
-        <div className="flex items-center gap-3">
-          {/* <Link to="/poster" className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-4 py-2 text-sm font-semibold hover:bg-muted transition">
-            Generate Poster
-          </Link> */}
-          <a href="#register" className="inline-flex items-center gap-1.5 rounded-full bg-mint px-4 py-2 text-sm font-semibold text-mint-foreground shadow-mint hover:opacity-90 transition">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border">
+      <div className="mx-auto h-20 flex items-center justify-center">
+        <div className="inline-flex items-center justify-center gap-3 rounded-full bg-mint pl-6 pr-8 h-14 shadow-mint">
+          <a href="#top" className="hover:scale-105 transition-transform flex items-center">
+            <img src={logo} className="h-10 w-auto object-contain brightness-0" alt="ZOHAR" />
+          </a>
+          <div className="h-6 w-px bg-black/20" />
+          <a href="#register" className="inline-flex items-center gap-1.5 font-semibold text-mint-foreground text-sm hover:opacity-80 transition-opacity">
             Register <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -324,7 +333,7 @@ function WhyAttend() {
     { icon: Award, t: "Certificate of Attendance", d: "Recognition you can carry into every room you enter." },
   ];
   return (
-    <section className="py-20 sm:py-28 bg-deep">
+    <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -418,7 +427,7 @@ function WhoShouldAttend() {
     { icon: Users, t: "Change-makers" },
   ];
   return (
-    <section className="py-20 sm:py-28 bg-deep">
+    <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -640,7 +649,7 @@ function Textarea({ label, name }: { label: string; name: string }) {
 /* ---------- Partners ---------- */
 function Partners() {
   return (
-    <section id="partners" className="py-20 sm:py-24 bg-deep">
+    <section id="partners" className="py-20 sm:py-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -719,10 +728,86 @@ function FAQ() {
   );
 }
 
+/* ---------- Registered Avatars ---------- */
+const avatarImgs = [
+  "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1531123897727-8f129e1bf08c?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1543269664-7eef42226a21?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1542596594-649edbc13630?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop",
+  "https://images.unsplash.com/photo-1507152832244-10d45c7eda57?w=100&h=100&fit=crop",
+];
+
+const marqueePath = "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
+
+function RegisteredAvatars() {
+  return (
+    <section className="relative w-full py-16 flex flex-col items-center justify-center overflow-hidden">
+      <div className="mb-4 text-center z-10 px-5">
+        <h2 className="font-display text-2xl sm:text-3xl font-bold">
+          Join hundreds already <span className="text-mint">registered</span>
+        </h2>
+      </div>
+      <div className="relative w-full max-w-6xl mx-auto h-[330px]">
+        <MarqueeAlongSvgPath
+          path={marqueePath}
+          viewBox="0 0 996 330"
+          baseVelocity={8}
+          slowdownOnHover={true}
+          draggable={true}
+          repeat={2}
+          dragSensitivity={0.1}
+          className="w-full h-full scale-105"
+          responsive
+          grabCursor
+          showPath={false}
+        >
+          {avatarImgs.map((src, i) => (
+            <div
+              key={i}
+              className="w-14 h-14 rounded-full overflow-hidden border-2 border-mint shadow-md hover:scale-125 duration-300 ease-in-out"
+            >
+              <img
+                src={src}
+                alt={`User ${i}`}
+                className="w-full h-full object-cover"
+                draggable={false}
+              />
+            </div>
+          ))}
+        </MarqueeAlongSvgPath>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Characters Image ---------- */
+function CharactersSection() {
+  return (
+    <section className="relative w-full pt-10 sm:pt-16 flex justify-center overflow-hidden">
+      <div className="relative w-full max-w-6xl mx-auto px-5 flex justify-center">
+        <img
+          src={charactersDesktop}
+          alt="Characters"
+          className="w-full max-w-4xl h-auto object-cover opacity-50 mix-blend-screen"
+        />
+        {/* Blurry fade at the bottom */}
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background to-transparent backdrop-blur-[6px]" style={{
+          maskImage: 'linear-gradient(to top, black 20%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 100%)'
+        }} />
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Footer ---------- */
 function Footer() {
   return (
-    <footer className="bg-deep border-t border-border pt-16 pb-8">
+    <footer className="border-t border-border pt-16 pb-8">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -765,7 +850,13 @@ function Footer() {
           <div>
             <h4 className="font-display font-semibold text-sm uppercase tracking-wider text-mint">Event</h4>
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-center gap-2"><Calendar className="h-4 w-4 text-mint" /> 2026 — Date TBA</li>
+              <li className="flex items-center gap-2"><Calendar className="h-4 w-4 text-mint" /> Saturday, 22nd August 2026</li>
+              <li className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 text-mint shrink-0 mt-0.5" />
+                <span>
+                  Abdullahi Sule Investment Centre, Muhammadu Buhari Way, Lafia, Nasarawa State
+                </span>
+              </li>
               <li><a href="#register" className="hover:text-mint transition">Register</a></li>
               <li><a href="#partners" className="hover:text-mint transition">Partner with us</a></li>
               <li><a href="#faq" className="hover:text-mint transition">FAQ</a></li>
