@@ -26,7 +26,7 @@ type Row = {
   created_at: string;
 };
 
-const CAPACITY = 100;
+const CAPACITY = 200;
 
 function AdminPage() {
   const navigate = useNavigate();

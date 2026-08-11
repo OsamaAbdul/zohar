@@ -525,7 +525,7 @@ function Register() {
           <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold">
             One form. <span className="text-mint">One decision.</span>
           </h2>
-          <p className="mt-3 text-muted-foreground">Only 100 seats. Register to lock yours in.</p>
+          <p className="mt-3 text-muted-foreground">Only 200 seats. Register to lock yours in.</p>
         </motion.div>
 
         {errorState === "full" ? (
@@ -536,7 +536,7 @@ function Register() {
             <div className="mx-auto h-12 w-12 rounded-full bg-flame grid place-items-center text-white">
               <Sparkles className="h-6 w-6" />
             </div>
-            <h3 className="mt-4 font-display text-2xl font-bold">All 100 spots are filled</h3>
+            <h3 className="mt-4 font-display text-2xl font-bold">All 200 spots are filled</h3>
             <p className="mt-2 text-sm text-muted-foreground">
               Thank you for your interest. Registration for INSPIRE 1.0 is now closed —
               follow us on social media for updates and future opportunities.
