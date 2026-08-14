@@ -272,7 +272,9 @@ function Hero() {
   );
 }
 
-/* ---------- About ---------- */
+
+
+/* ---------- About section---------- */
 function About() {
   return (
     <section id="about" className="py-20 sm:py-28">
