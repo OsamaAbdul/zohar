@@ -14,6 +14,10 @@ import heroBg from "@/assets/hero-bg.jpg";
 import aboutImg from "@/assets/about-youth.jpg";
 import logo from "@/assets/ZOHAR-1.png";
 import charactersDesktop from "@/assets/characters-desktop (1).webp";
+import speaker2 from "@/assets/speaker1.jpeg";
+import speaker1 from "@/assets/speaker2.jpeg";
+import speaker3 from "@/assets/speaker3.jpeg";
+import speaker4 from "@/assets/speaker4.png";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Dialog,
@@ -24,8 +28,12 @@ import {
 } from "@/components/ui/dialog";
 import MarqueeAlongSvgPath from "@/components/ui/marquee-along-svg-path";
 import PhoneMockupBasic from "@/components/ui/phone-mockups-1";
+import { getPublicPortalStatus } from "@/lib/public.functions";
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    return getPublicPortalStatus();
+  },
   head: () => ({
     meta: [
       { title: "INSPIRE 1.0 — The Economy of Legacy Builders | ZOHAR" },
@@ -373,6 +381,13 @@ function WhyAttend() {
 }
 
 /* ---------- Speakers ---------- */
+const speakersList = [
+  { image: speaker1, name: "Umar Ibrahim Dahiru PhD", role: "tate Coordinator NG-CARES" },
+  { image: speaker2, name: "Shamsiyyah Umar PhD", role: "Founder & Executive Director Special Physically Challenged Care Foundation (We Are Special)" },
+  { image: speaker3, name: "Yonpan Dariem", role: "National Programme Coordinator of Safer World Foundation and the Country Representative (North Central Nigeria) for Both Ends Believing (BEB)" },
+  { image: speaker4, name: "Engr. Onipede Jonathan Oluwmuyiwa", role: "CEO/Founder, Cloudtech Connect" },
+];
+
 function Speakers() {
   return (
     <section id="speakers" className="py-20 sm:py-28">
@@ -390,26 +405,24 @@ function Speakers() {
               Voices that <span className="text-mint">built</span> something that lasts.
             </h2>
           </div>
-          <p className="text-sm text-muted-foreground italic">More distinguished speakers will be announced soon.</p>
+          <p className="text-sm text-muted-foreground italic">Our distinguished speakers.</p>
         </motion.div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((item, i) => (
+          {speakersList.map((speaker, i) => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              key={item}
-              className="rounded-2xl border border-border bg-card p-5 text-center"
+              key={i}
+              className="rounded-3xl border border-border bg-card p-6 sm:p-8 text-center hover:-translate-y-1 hover:border-mint/30 transition-all shadow-sm hover:shadow-md"
             >
-              <div className="mx-auto h-28 w-28 rounded-full bg-gradient-mint/20 border border-mint/30 grid place-items-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-mint opacity-20" />
-                <Sparkles className="h-8 w-8 text-mint relative" />
+              <div className="mx-auto h-36 w-36 sm:h-44 sm:w-44 rounded-full border-4 border-card shadow-sm relative overflow-hidden bg-muted">
+                <img src={speaker.image} alt={speaker.name} className="h-full w-full object-cover" />
               </div>
-              <h3 className="mt-4 font-display font-semibold">To Be Announced</h3>
-              <p className="text-xs text-muted-foreground mt-1">Distinguished Leader</p>
-              <p className="text-xs text-mint mt-3">Reveal coming soon</p>
+              <h3 className="mt-5 font-display text-lg font-semibold">{speaker.name}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{speaker.role}</p>
             </motion.div>
           ))}
         </div>
@@ -467,9 +480,10 @@ function WhoShouldAttend() {
 
 /* ---------- Register ---------- */
 function Register() {
+  const { isOpen } = Route.useLoaderData();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [errorState, setErrorState] = useState<null | "full" | "closed" | "generic">(null);
+  const [errorState, setErrorState] = useState<null | "full" | "closed" | "generic">(isOpen ? null : "closed");
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -558,6 +572,18 @@ function Register() {
             <p className="mt-2 text-sm text-muted-foreground">
               The registration portal is currently closed. Please check back later or follow us on social media for updates.
             </p>
+            <div className="mt-6 flex gap-3 justify-center">
+              {[
+                { Icon: Instagram, href: "https://www.instagram.com/official_zohar?igsh=NmJ1dXBoZ2FkenBv" },
+                { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=61591420447002&mibextid=ZbWKwL" },
+                { Icon: Linkedin, href: "https://www.linkedin.com/company/officialzohar/" },
+                { Icon: Tiktok, href: "https://vm.tiktok.com/ZS9r65BhNC4ua-Hbb9D/" },
+              ].map(({ Icon, href }, i) => (
+                <a key={i} href={href} target={href !== "#" ? "_blank" : undefined} rel={href !== "#" ? "noopener noreferrer" : undefined} className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-mint hover:text-mint-foreground transition-colors">
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </motion.div>
         ) : submitted ? (
           <motion.div
