@@ -8,7 +8,7 @@ import {
   GraduationCap, Briefcase, Rocket, Crown, Palette, Mail, Phone,
   Instagram, Facebook, Youtube, Twitter, MapPin, Calendar, Check,
   ChevronDown, Quote, TrendingUp,
-  Linkedin,
+  Linkedin, Lock,
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import aboutImg from "@/assets/about-youth.jpg";
@@ -469,7 +469,7 @@ function WhoShouldAttend() {
 function Register() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [errorState, setErrorState] = useState<null | "full" | "generic">(null);
+  const [errorState, setErrorState] = useState<null | "full" | "closed" | "generic">(null);
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -498,6 +498,8 @@ function Register() {
       });
       if (res.status === 409) {
         setErrorState("full");
+      } else if (res.status === 403) {
+        setErrorState("closed");
       } else if (!res.ok) {
         const body = await res.json().catch(() => ({}));
         setErrorMsg(body?.error || "Could not save your registration. Please try again.");
@@ -527,7 +529,7 @@ function Register() {
           <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold">
             One form. <span className="text-mint">One decision.</span>
           </h2>
-          <p className="mt-3 text-muted-foreground">Only 200 seats. Register to lock yours in.</p>
+          <p className="mt-3 text-muted-foreground">Only 300 seats. Register to lock yours in.</p>
         </motion.div>
 
         {errorState === "full" ? (
@@ -538,10 +540,23 @@ function Register() {
             <div className="mx-auto h-12 w-12 rounded-full bg-flame grid place-items-center text-white">
               <Sparkles className="h-6 w-6" />
             </div>
-            <h3 className="mt-4 font-display text-2xl font-bold">All 200 spots are filled</h3>
+            <h3 className="mt-4 font-display text-2xl font-bold">All spots are filled</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Thank you for your interest. Registration for INSPIRE 1.0 is now closed —
+              Thank you for your interest. Registration for INSPIRE 1.0 is now full —
               follow us on social media for updates and future opportunities.
+            </p>
+          </motion.div>
+        ) : errorState === "closed" ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+            className="mt-10 rounded-3xl border border-border bg-card p-8 text-center"
+          >
+            <div className="mx-auto h-12 w-12 rounded-full bg-muted grid place-items-center text-muted-foreground">
+              <Lock className="h-6 w-6" />
+            </div>
+            <h3 className="mt-4 font-display text-2xl font-bold">Registration Closed</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              The registration portal is currently closed. Please check back later or follow us on social media for updates.
             </p>
           </motion.div>
         ) : submitted ? (

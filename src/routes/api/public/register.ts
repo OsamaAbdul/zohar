@@ -47,6 +47,9 @@ export const Route = createFileRoute("/api/public/register")({
           return Response.json({ error: "Could not save registration" }, { status: 500 });
         }
         const result = data as { status: string; capacity?: number; remaining?: number };
+        if (result.status === "closed") {
+          return Response.json({ error: "registration_closed" }, { status: 403 });
+        }
         if (result.status === "full") {
           return Response.json({ error: "spot_filled", capacity: result.capacity }, { status: 409 });
         }
